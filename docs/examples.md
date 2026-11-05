@@ -179,7 +179,7 @@ A shared wrapper can contain other systems' listeners. Prefer disconnecting only
 
 ## Character removal with a shared wrapper
 
-`Player` and `Humanoid` are existing references supplied by your character controller. Capture the character instead of reading `Humanoid.Parent` again during removal.
+`Player` and `Humanoid` are existing references supplied by your character controller. Register this for the player's current character, before its removal. This example assumes the next `CharacterRemoving` event belongs to that character.
 
 ```lua
 local character = Humanoid.Parent
@@ -189,17 +189,15 @@ local connection = DiedConnex:Connect(function()
     print("Character died!")
 end)
 
-local removingConnection
-
-removingConnection = Player.CharacterRemoving:Connect(function(removingCharacter)
-    if removingCharacter == character then
-        connection:Disconnect()
-        removingConnection:Disconnect()
-    end
+Player.CharacterRemoving:Once(function(removingCharacter)
+    connection:Disconnect()
+    -- Or DiedConnex:Destroy(), if you own every listener in the wrapper.
 end)
 ```
 
-This assumes no other owner destroys the shared wrapper or this handle first. If the enclosing controller ends before character removal, it must also disconnect both handles. Idle cleanup does not watch character removal or cancel callbacks already started.
+`Once` above is Roblox's native signal method. It disconnects the `CharacterRemoving` listener automatically after its first invocation. The captured `character` is kept for context; this version does not compare it with `removingCharacter`. If you cannot assume the next removal belongs to this character, use a filtered `Connect` listener and disconnect it after a match.
+
+Prefer `connection:Disconnect()` for shared wrappers. `DiedConnex:Destroy()` is an alternative only when destroying every listener is intentional. This assumes no other owner destroys the wrapper or connection handle first. If the controller ends before character removal, it must explicitly clean up its listeners too.
 
 ---
 

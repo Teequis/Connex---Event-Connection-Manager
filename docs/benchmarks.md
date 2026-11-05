@@ -8,7 +8,7 @@ The author supplied the benchmark place as a DevForum attachment:
 
 The file is hosted in DevForum secure uploads; access may require signing in to the forum.
 
-The attachment has not been inspected or run here. The small script later on this page is a separate starting point for measuring **registration and cleanup**; it does not reproduce all reported tables.
+The attachment has not been inspected or run here.
 
 ## Author-reported measurements
 
@@ -128,54 +128,10 @@ Connex processed approximately **2.98 million lightweight callbacks per second**
 
 This is a synthetic internal throughput test, not a native event-dispatch comparison.
 
-## Reproduce in Studio
-
-Place Connex in `ReplicatedStorage`, then run this in a server Script in an otherwise empty test place. It uses independent wrappers and non-yielding setup. Record Studio/engine version, device, execution mode, listener count, and multiple runs.
-
-```lua
-local Connex = require(game:GetService("ReplicatedStorage"):WaitForChild("Connex"))
-local COUNT = 1000
-local ROUNDS = 10
-
-local function measure(label, register, cleanup)
-    local total = 0
-    for round = 1, ROUNDS + 1 do
-        local event = Instance.new("BindableEvent")
-        local start = os.clock()
-        local state = register(event.Event)
-        cleanup(state)
-        local elapsed = os.clock() - start
-        event:Destroy()
-        if round > 1 then total += elapsed end -- discard warm-up
-        task.wait()
-    end
-    print(label, "mean registration + cleanup ms:", total / ROUNDS * 1000)
-end
-
-measure("Native", function(signal)
-    local connections = {}
-    for i = 1, COUNT do
-        connections[i] = signal:Connect(function() end)
-    end
-    return connections
-end, function(connections)
-    for _, connection in ipairs(connections) do connection:Disconnect() end
-end)
-
-measure("Connex", function(signal)
-    local wrapper = Connex.new(signal)
-    for i = 1, COUNT do wrapper:Connect(function()
-    end)
-end
-    return wrapper
-end, function(wrapper)
-    wrapper:Destroy()
-end)
-```
 
 ## Interpret results carefully
 
-The combined measurement includes object allocation and cleanup; it cannot isolate either cost. Run with different listener counts and reverse scenario order to check warm-up bias. Report distributions across independent runs rather than one favorable sample.
+When measuring registration and cleanup together, the result includes object allocation and cannot isolate either cost. Use different listener counts and reverse scenario order to check warm-up bias. Report distributions across independent runs rather than one favorable sample.
 
 For dispatch benchmarks, count completed callbacks and wait for a completion barrier before stopping the timer, especially for `ConnectAsync`. Separate the first dispatch (lazy sorting) from steady state, and vary priority changes, named replacement, callback work, and yielding. A loop timing only `BindableEvent:Fire` can measure scheduling rather than completed listener work.
 

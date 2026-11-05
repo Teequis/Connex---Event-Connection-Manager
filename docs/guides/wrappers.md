@@ -22,6 +22,7 @@ local first = Connex.Wrap(signal)
 first:Connect(function()
     print("Shared")
 end, "SharedListener")
+
 local second = Connex.Wrap(signal)
 assert(first == second)
 ```

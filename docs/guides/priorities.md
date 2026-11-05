@@ -10,9 +10,11 @@ A name identifies one active listener within a wrapper. Registering the same nam
 wrapper:Connect(function()
     print("High")
 end, "High", 100)
+
 wrapper:Connect(function()
     print("Low")
 end, "Low", 0)
+
 local high = wrapper:GetConnection("High")
 if high then
     high:SetPriority(200)
