@@ -9,26 +9,16 @@ theme:
   language: en
   icon:
     logo: material/connection
+  font: false
   palette:
-    - scheme: default
-      primary: deep purple
-      accent: cyan
-      toggle:
-        icon: material/weather-night
-        name: Switch to dark mode
     - scheme: slate
-      primary: deep purple
-      accent: cyan
-      toggle:
-        icon: material/weather-sunny
-        name: Switch to light mode
+      primary: custom
+      accent: custom
   features:
-    - navigation.tabs
     - navigation.sections
     - navigation.footer
     - navigation.top
     - content.code.copy
-    - content.action.edit
     - search.suggest
     - search.highlight
 plugins:
@@ -40,9 +30,11 @@ markdown_extensions:
   - pymdownx.details
   - pymdownx.highlight:
       anchor_linenums: true
+      linenums: true
   - pymdownx.superfences
   - toc:
       permalink: true
+      toc_depth: 3
 extra_css:
   - stylesheets/extra.css
 nav:
