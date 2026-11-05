@@ -12,3 +12,7 @@ profile.svg
 
 # Time trace
 trace.json
+
+# Documentation builds
+site/
+.venv/

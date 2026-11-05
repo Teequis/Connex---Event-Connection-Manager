@@ -1,0 +1,63 @@
+site_name: Connex
+site_description: Priorities, named listeners, and explicit lifecycle management for Roblox events.
+site_url: https://teequis.github.io/Connex---Event-Connection-Manager/
+repo_url: https://github.com/Teequis/Connex---Event-Connection-Manager
+repo_name: Teequis/Connex
+edit_uri: edit/main/docs/
+theme:
+  name: material
+  language: en
+  icon:
+    logo: material/connection
+  palette:
+    - scheme: default
+      primary: deep purple
+      accent: cyan
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - scheme: slate
+      primary: deep purple
+      accent: cyan
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.footer
+    - navigation.top
+    - content.code.copy
+    - content.action.edit
+    - search.suggest
+    - search.highlight
+plugins:
+  - search
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - pymdownx.details
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.superfences
+  - toc:
+      permalink: true
+extra_css:
+  - stylesheets/extra.css
+nav:
+  - Getting Started:
+      - Introduction: index.md
+      - Installation: getting-started/installation.md
+      - Quick Start: getting-started/quick-start.md
+  - Guides:
+      - Shared vs. Independent Wrappers: guides/wrappers.md
+      - Connect vs. ConnectAsync: guides/execution.md
+      - Priorities & Named Listeners: guides/priorities.md
+      - Cleanup & Best Practices: guides/cleanup.md
+      - Examples: examples.md
+  - API Reference:
+      - Connex: api/Connex.md
+      - ConnexConnection: api/ConnexConnection.md
+      - Benchmarks: benchmarks.md
+  - Contributing: contributing.md
