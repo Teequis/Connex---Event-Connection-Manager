@@ -7,10 +7,16 @@ Higher priorities dispatch first; equal priorities preserve registration order. 
 A name identifies one active listener within a wrapper. Registering the same name disconnects the old listener and emits a warning. Prefer stable names for replaceable tasks; omit names for independent listeners.
 
 ```lua
-wrapper:Connect(function() print("High") end, "High", 100)
-wrapper:Connect(function() print("Low") end, "Low", 0)
+wrapper:Connect(function()
+    print("High")
+end, "High", 100)
+wrapper:Connect(function()
+    print("Low")
+end, "Low", 0)
 local high = wrapper:GetConnection("High")
-if high then high:SetPriority(200) end
+if high then
+    high:SetPriority(200)
+end
 ```
 
 Sorts happen lazily before a later dispatch. SetPriority does not reorder callbacks already being dispatched. For asynchronous listeners, priority orders task spawning, not completion. See [execution behavior](execution.md).

@@ -2,7 +2,13 @@
 
 The tables below are **author-reported results** supplied in the Connex launch draft. They have not been rerun or independently verified for the reviewed source commit. The draft reports about five minutes, 51 cycles, 5,796 measurements, zero errors, and roughly 50 samples per configuration in Roblox Studio. Hardware, engine version, and the original benchmark project were not supplied.
 
-The original draft's benchmark download is a placeholder, so there is no working reproduction link yet. The small script later on this page is a separate starting point for measuring **registration and cleanup**; it does not reproduce all reported tables.
+The author supplied the benchmark place as a DevForum attachment:
+
+[Connex_Benchmark_Place.rbxl (95.8 KB)](https://devforum.roblox.com/secure-uploads/uploads/original/5X/1/c/c/d/1ccd08d6e1e8ddf7b621f73b1a77cc61243eb105.rbxl)
+
+The file is hosted in DevForum secure uploads; access may require signing in to the forum.
+
+The attachment has not been inspected or run here. The small script later on this page is a separate starting point for measuring **registration and cleanup**; it does not reproduce all reported tables.
 
 ## Author-reported measurements
 
@@ -158,7 +164,9 @@ end)
 
 measure("Connex", function(signal)
     local wrapper = Connex.new(signal)
-    for i = 1, COUNT do wrapper:Connect(function() end) end
+    for i = 1, COUNT do wrapper:Connect(function()
+    end)
+end
     return wrapper
 end, function(wrapper)
     wrapper:Destroy()

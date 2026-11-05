@@ -47,3 +47,11 @@ For a shared wrapper, disconnect only the listeners you own. Cleaning or destroy
 ## Source and license
 
 [Source code](Connex.lua) · [MIT License](LICENSE) · [Documentation maintenance](docs/contributing.md)
+
+## Links
+
+- **Documentation & API Reference:** [Read on GitHub](https://github.com/Teequis/Connex---Event-Connection-Manager/tree/main)
+- **Source Code:** [Connex.lua](https://github.com/Teequis/Connex---Event-Connection-Manager/blob/main/Connex.lua)
+- **Module:** [Connex in the Creator Store](https://create.roblox.com/store/asset/91608240719237/Connex)
+
+- **Benchmark Place:** [Connex_Benchmark_Place.rbxl (95.8 KB)](https://devforum.roblox.com/secure-uploads/uploads/original/5X/1/c/c/d/1ccd08d6e1e8ddf7b621f73b1a77cc61243eb105.rbxl)

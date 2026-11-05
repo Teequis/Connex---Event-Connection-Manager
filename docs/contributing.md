@@ -11,3 +11,7 @@ No website build or Python installation is required to read or edit these pages.
 ---
 
 [Documentation index](../README.md)
+
+## Source type annotations
+
+At the reviewed commit, `Once` accepts omitted name and priority at runtime, but its source signature uses `name: string, priority: number`. For strict type checking, the source should declare `name: string?, priority: number?`. This documentation describes both parameters as optional. This documentation update does not change Connex.lua.

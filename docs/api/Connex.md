@@ -88,16 +88,14 @@ Same registration rules as `Connect`, with callbacks invoked using `task.spawn`.
 
 `ConnexConnection`
 
-### :Once(callback, name, priority) → ConnexConnection
+### :Once(callback, name?, priority?) → ConnexConnection
 
 Registers a one-time inline callback. Its handle is destroyed **before** callback invocation. Paused listeners do not consume their one invocation; manual `connection:Fire(...)` does.
 
-> **Annotation mismatch**
-> The source declares `name: string` and `priority: number` as required here. Runtime registration tolerates nil and defaults priority to zero. For consistency with the declared signature, examples pass an explicit name and priority.
->
+Both `name` and `priority` are optional. Omit the name for an unnamed listener; priority defaults to `0`.
 
 ```lua
-:Once(callback, name, priority) -> ConnexConnection
+:Once(callback, name?, priority?) -> ConnexConnection
 ```
 
 #### Parameters
@@ -105,8 +103,8 @@ Registers a one-time inline callback. Its handle is destroyed **before** callbac
 | Name | Type | Description |
 | --- | --- | --- |
 | `callback` | `(...any) -> ()` | Callback invoked at most once. |
-| `name` | `string` | Listener name (nil is tolerated at runtime). |
-| `priority` | `number` | Priority (nil defaults to 0 at runtime). |
+| `name` | `string?` | Optional listener name. |
+| `priority` | `number?` | Optional priority; defaults to 0. |
 
 #### Returns
 

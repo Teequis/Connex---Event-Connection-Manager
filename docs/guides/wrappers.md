@@ -6,7 +6,9 @@
 
 ```lua
 local wrapper = Connex.new(signal)
-wrapper:Connect(function() print("Owned by this component") end)
+wrapper:Connect(function()
+    print("Owned by this component")
+end)
 -- On component teardown, outside callback dispatch:
 -- wrapper:Destroy()
 ```
@@ -17,7 +19,9 @@ wrapper:Connect(function() print("Owned by this component") end)
 
 ```lua
 local first = Connex.Wrap(signal)
-first:Connect(function() print("Shared") end, "SharedListener")
+first:Connect(function()
+    print("Shared")
+end, "SharedListener")
 local second = Connex.Wrap(signal)
 assert(first == second)
 ```
