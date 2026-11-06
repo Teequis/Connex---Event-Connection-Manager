@@ -10,7 +10,7 @@ Both methods register listeners in the same priority-sorted collection. Their ca
 | Completion order | A yielding callback delays later listeners in that dispatch | No completion-order guarantee |
 | Errors | Failed `pcall` reports via `task.spawn(error, err)` | Reported by the spawned task |
 
-`task.spawn` is not a promise that the callback starts later. Async priority does not guarantee completion order or parallel CPU execution.
+ConnectAsync() schedules callbacks in separate tasks using task.spawn(). Priority determines the scheduling order, but in this case, it does not guarantee the order in which the callbacks complete.
 
 ## Keep inline work short
 
